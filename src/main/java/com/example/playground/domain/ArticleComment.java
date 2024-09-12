@@ -1,9 +1,6 @@
 package com.example.playground.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -17,13 +14,18 @@ public class ArticleComment extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 5000)
     private String content;
+
+    @ManyToOne
+    private Article article;
 
     protected ArticleComment() { }
 
     @Builder
-    public ArticleComment(String content) {
+    public ArticleComment(String content, Article article) {
         this.content = content;
+        this.article = article;
     }
 
 }
