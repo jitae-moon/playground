@@ -3,6 +3,7 @@ package com.example.playground.domain;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.LinkedHashSet;
@@ -17,9 +18,11 @@ public class Article extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(length = 1000)
     private String title;
 
+    @Setter
     @Column(length = 50000)
     private String content;
 
@@ -30,10 +33,9 @@ public class Article extends AuditingFields {
     protected Article() { }
 
     @Builder
-    public Article(String title, String content, Set<ArticleComment> articleComments) {
+    public Article(String title, String content) {
         this.title = title;
         this.content = content;
-        this.articleComments = articleComments;
     }
 
 }
